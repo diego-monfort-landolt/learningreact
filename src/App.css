@@ -1,80 +1,43 @@
-h1 {
-    background-color: #000;
-    text-shadow: 5px 5px 25px yellow;
-    color: #fff;
-    padding: 20px;
-    flex-wrap: wrap;
-}
-.hbild {
-    width: 100%;
-    height: 60vh;
-    object-fit: cover;
-    background-position: center;
-    opacity: .2 #000;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
+#root {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
     text-align: center;
-}
-.cont-intro {
-    display: flex;
-    flex-direction: column;
-    padding: 20px 70px;
-    background-color: #000;
-    color: #fff;
-    text-align: justify;
-    
-}
-.introdusion  {
-    display: flex;
-    align-items: center;
-    margin-top: -300px;
+  }
+  
+  .logo {
+    height: 6em;
+    padding: 1.5em;
+    will-change: filter;
+  }
+  .logo:hover {
+    filter: drop-shadow(0 0 2em #646cffaa);
+  }
+  .logo.react:hover {
+    filter: drop-shadow(0 0 2em #61dafbaa);
+  }
+  
+  @keyframes logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  @media (prefers-reduced-motion: no-preference) {
+    a:nth-of-type(2) .logo {
+      animation: logo-spin infinite 20s linear;
+    }
+  }
+  
+  .card {
+    padding: 2em;
+  }
+  
+  .read-the-docs {
+    color: #888;
+  }
 
-}
-.buscador {
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 10px;
-}
-
-.inp {
-    padding: 10px;
-    border-radius: 12px;
-    box-shadow: 5px 5px 20px #000;
-    border: .5px solid red;
-    outline: none;
-}
-.btn-chance {
-    padding: 10px;
-    margin: 15px;
-    border-radius: 12px 0 12px 0;
-    text-align: justify;
-    box-shadow: 5px 5px 20px #000;
-    outline: none;
-    border: 1px solid red;
-    background-color: lightgray;
-    animation: myAnim 4s ease-out 0s infinite normal forwards;
-    transition: all;
-}
-.btn-chance:hover {
-    box-shadow: 7px 7px 20px #000;
-    
-}
-
-
-@keyframes myAnim {
-	0% {
-		opacity: 1;
-	}
-
-	50% {
-		opacity: 0.2;
-	}
-
-	100% {
-		opacity: 1;
-	}
-}
+  

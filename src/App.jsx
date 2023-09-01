@@ -1,40 +1,74 @@
-import { useState } from 'react'
-import { AiOutlineBulb } from "react-icons/ai";
-import './App.css'
-import imguno from './assets/testimonio-diego.jpg'
+import { useEffect, useState } from 'react'
 
+const FollowMouse = () => {
+  const [enabled, setEnabled] = useState(false)
+  const [position, setPosition] = useState({ x: 0, y: 0 })
 
-const ejemplo = <p>
-  <b>Lorem ipsum dolor</b> sit amet, consectetur adipisicing elit. Alias impedit repellendus ab enim. <mark>Deserunt perferendis</mark> repellat vitae neque voluptatibus dolore asperiores, doloremque amet! Quae laudantium, obcaecati quia totam repellendus esse.
-</p>
+  // pointer move
+  useEffect(() => {
+    console.log('effect ', { enabled })
 
-function App(){
- 
+    const handleMove = (event) => {
+      const { clientX, clientY } = event
+      setPosition({ x: clientX, y: clientY })
+    }
+
+    if (enabled) {
+      window.addEventListener('pointermove', handleMove)
+    }
+
+    // cleanup:
+    // -> cuando el componente se desmonta
+    // -> cuando cambian las dependencias, antes de ejecutar
+    //    el efecto de nuevo
+    return () => { // cleanup method
+      console.log('cleanup')
+      window.removeEventListener('pointermove', handleMove)
+    }
+  }, [enabled])
+
+  // [] -> solo se ejecuta una vez cuando se monta el componente
+  // [enabled] -> se ejecuta cuando cambia enabled y cuando se monta el componente
+  // undefined -> se ejecuta cada vez que se renderiza el componente
+
+  // change body className
+  useEffect(() => {
+    document.body.classList.toggle('no-cursor', enabled)
+
+    return () => {
+      document.body.classList.remove('no-cursor')
+    }
+  }, [enabled])
+
   return (
     <>
-    <div className='app'>
-      <h1>Frontend Developer</h1>
-    </div>
-    <img src={imguno} alt='bild' className='hbild' />
-
-    <section className='cont-intro'>
-      <h2 className='introdusion'>
-         Welcome on my WebSite
-       </h2>{ejemplo}
-
-    </section>
-
-    <section className='buscador'>
-      
-     <button  className='btn-chance'> Change  <AiOutlineBulb /> </button>
-
-   
-    </section>
-    
-    
-    
+      <div style={{
+        position: 'absolute',
+        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+        border: '.5px solid yellow',
+        borderRadius: '50%',
+        opacity: 0.8,
+        pointerEvents: 'none',
+        left: -25,
+        top: -25,
+        width: 50,
+        height: 50,
+        boxShadow: '5px 5px 25px #fff',
+        transform: `translate(${position.x}px, ${position.y}px)`
+      }}
+      />
+      <button onClick={() => setEnabled(!enabled)}>
+        {enabled ? 'Desactivar' : 'Activar'}
+      </button>
     </>
-    
+  )
+}
+
+function App() {
+  return (
+    <main>
+      <FollowMouse />
+    </main>
   )
 }
 
